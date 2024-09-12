@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример страницы</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid black;
+        }
+        .header div {
+            font-size: 24px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+        }
+        label {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        input {
+            margin-bottom: 15px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .canvas-container {
+            width: 400px;
+            height: 200px;
+            background-color: #eacaca;
+            border: 2px solid blue;
+        }
+        .output-container {
+            margin-top: 20px;
+            border: 1px solid black;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<footer class="header">
+    <div>Захарченко Роман Владимирович</div>
+    <div>Группа Р3131 / Вариант 660</div>
+</footer>
+
+<div class="container">
+    <form>
+        <label for="radius">Радиус:</label>
+        <input type="text" id="radius" name="radius">
+
+        <label for="x">X:</label>
+        <input type="text" id="x" name="x">
+
+        <label for="y">Y:</label>
+        <input type="text" id="y" name="y">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="canvas-container"></div>
+</div>
+
+<div class="output-container"></div>
+
+</body>
+</html>
