@@ -11,19 +11,20 @@
             padding: 0;
             box-sizing: border-box;
         }
-        .header {
+        footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
             border-bottom: 1px solid black;
+            font-family: fantasy;
         }
-        .header div {
+        footer div {
             font-size: 24px;
         }
         .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             padding: 20px;
         }
         form {
@@ -52,38 +53,40 @@
             background-color: #eacaca;
             border: 2px solid blue;
         }
-        .output-container {
-            margin-top: 20px;
-            border: 1px solid black;
-            height: 150px;
+        .error{
+            /*visibility: hidden;*/
         }
     </style>
 </head>
 <body>
 
-<footer class="header">
-    <div>Захарченко Роман Владимирович</div>
-    <div>Группа Р3131 / Вариант 660</div>
+<footer>
+    <div>
+        <b>Захарченко Роман Владимирович</b>
+    </div>
+    <div>
+        <b>Группа Р3131 / Вариант 660</b>
+    </div>
 </footer>
 
 <div class="container">
-    <form>
-        <label for="radius">Радиус:</label>
-        <input type="text" id="radius" name="radius">
+    <form id = "myform" class="myform">
+        <label for="r">Радиус:</label>
+        <input type="number" id="r" name="r">
 
         <label for="x">X:</label>
-        <input type="text" id="x" name="x">
+        <input type="number" id="x" name="x">
 
         <label for="y">Y:</label>
-        <input type="text" id="y" name="y">
+        <input type="number" id="y" name="y">
 
-        <button type="submit">Submit</button>
+        <button type="submit">Проверить</button>
+        <div id="error" class="error">
+             Тут будут ошибки
+        </div>
     </form>
-
     <div class="canvas-container"></div>
 </div>
-
-<div class="output-container"></div>
-
+<script src = "script.js"></script>
 </body>
 </html>
