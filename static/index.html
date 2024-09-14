@@ -5,88 +5,225 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Пример страницы</title>
     <style>
-        body {
-            font-family: "Times New Roman", serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        footer {
+
+        body {
+            background-color: #1c1c1c; /* Тёмный фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 70%;
+            max-width: 1000px;
+            background-color: #333; /* Тёмный фон контейнера */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid black;
-            font-family: fantasy;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
-        footer div {
-            font-size: 24px;
+
+        h1, h2 {
+            font-size: 1.3em;
+            color: #f0f0f0;
         }
-        .container {
+
+        .form-container {
             display: flex;
-            justify-content: space-evenly;
-            padding: 20px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
         }
+
         form {
             display: flex;
             flex-direction: column;
-            width: 200px;
+            width: 280px;
         }
-        label {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        input {
+
+        .input-group {
             margin-bottom: 15px;
-            padding: 8px;
-            font-size: 16px;
         }
+
+        label {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background-color: #444;
+            color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            background-color: #555;
+            border-color: #003366; /* Темно-синий цвет */
+            outline: none;
+        }
+
+        .radio-group label, .checkbox-group label {
+            margin-right: 10px;
+            color: #e0e0e0;
+        }
+
         button {
-            padding: 8px;
-            font-size: 16px;
+            padding: 10px;
+            font-size: 1.1em;
+            background-color: #003366; /* Тёмно-синий цвет кнопки */
+            color: white;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            width: fit-content;
+            transition: background-color 0.3s ease;
         }
-        .canvas-container {
-            width: 400px;
+
+        button:hover {
+            background-color: #001f4d;
+        }
+
+        .rectangle {
+            width: 300px;
             height: 200px;
-            background-color: #eacaca;
-            border: 2px solid blue;
+            background-color: #444;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        .error{
-            /*visibility: hidden;*/
+
+        .large-rectangle {
+            padding: 20px;
+            width: 100%;
+            border: 2px dashed #003366; /* Темно-синий цвет рамки */
+            border-radius: 12px;
+            background-color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #f0f0f0;
+        }
+
+        thead {
+            background-color: #003366;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #444;
+        }
+
+        tbody tr:hover {
+            background-color: #555;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 
-<footer>
-    <div>
-        <b>Захарченко Роман Владимирович</b>
-    </div>
-    <div>
-        <b>Группа Р3131 / Вариант 660</b>
-    </div>
-</footer>
-
-<div class="container">
-    <form id = "myform" class="myform">
-        <label for="r">Радиус:</label>
-        <input type="number" id="r" name="r">
-
-        <label for="x">X:</label>
-        <input type="number" id="x" name="x">
-
-        <label for="y">Y:</label>
-        <input type="number" id="y" name="y">
-
-        <button type="submit">Проверить</button>
-        <div id="error" class="error">
-             Тут будут ошибки
+    <div class="container">
+        <div class="header">
+            <h1>Захарченко Роман Владимирович</h1>
+            <h2>Группа Р3131 / Вариант 660</h2>
         </div>
-    </form>
-    <div class="canvas-container"></div>
-</div>
-<script src = "script.js"></script>
+
+        <div class="form-container">
+            <form>
+                <!-- Поля формы (оставляем как есть) -->
+                <div class="input-group">
+                    <label>Изменение X:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="x-coordinate" value="-4"> -4</label>
+                        <label><input type="radio" name="x-coordinate" value="-3"> -3</label>
+                        <label><input type="radio" name="x-coordinate" value="-2"> -2</label>
+                        <label><input type="radio" name="x-coordinate" value="-1"> -1</label>
+                        <label><input type="radio" name="x-coordinate" value="0"> 0</label>
+                        <label><input type="radio" name="x-coordinate" value="1"> 1</label>
+                        <label><input type="radio" name="x-coordinate" value="2"> 2</label>
+                        <label><input type="radio" name="x-coordinate" value="3"> 3</label>
+                        <label><input type="radio" name="x-coordinate" value="4"> 4</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="y-coordinate">Изменение Y:</label>
+                    <input type="text" id="y-coordinate" name="y-coordinate" placeholder="-3 ... 3" pattern="-?[0-3]" title="Введите число от -3 до 3">
+                </div>
+
+                <div class="input-group">
+                    <label>Изменение R:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="r-radius" value="1"> 1</label>
+                        <label><input type="checkbox" name="r-radius" value="2"> 2</label>
+                        <label><input type="checkbox" name="r-radius" value="3"> 3</label>
+                        <label><input type="checkbox" name="r-radius" value="4"> 4</label>
+                        <label><input type="checkbox" name="r-radius" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <button type="submit">Отправить</button>
+            </form>
+
+            <!-- Canvas для отрисовки фигуры -->
+            <canvas id="graphCanvas" width="300" height="300"></canvas>
+        </div>
+
+        <div class="large-rectangle">
+            <table>
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Дата</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Элемент 1</td>
+                    <td>Это описание первого элемента.</td>
+                    <td>01.09.2024</td>
+                </tr>
+                <tr>
+                    <td>Элемент 2</td>
+                    <td>Описание второго элемента.</td>
+                    <td>05.09.2024</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src = "script.js"></script>
+    <script src = "graph.js"></script>
 </body>
 </html>

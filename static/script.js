@@ -1,5 +1,4 @@
 class Request {
-
     constructor(form) {
         console.log("Request init")
         this.form = form;
