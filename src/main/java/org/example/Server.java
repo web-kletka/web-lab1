@@ -54,13 +54,13 @@ public class Server {
 
     private boolean calculate(int x, Float y, Float r){
 
-        if (x < 0 && y < 0)
+        if (x <= 0 && y <= 0)
                 return false;
-        if ((x < 0 && y > 0) && x * x + y * y > (r / 2) * (r / 2))
+        if ((x <= 0 && y >= 0) && x * x + y * y > (r / 2) * (r / 2))
                 return false;
-        if ((x > 0 && y > 0) && x > r/2 || y > r)
+        if ((x >= 0 && y >= 0) && x > r/2 || y > r)
                 return false;
-        if ((x > 0 && y < 0) && x - y > r / 2)
+        if ((x >= 0 && y <= 0) && x - y > r / 2)
                 return false;
 
         return true;

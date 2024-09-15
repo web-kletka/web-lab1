@@ -5,6 +5,20 @@ const R = 100;  // Радиус для графика
 const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
 
+const checkboxes = document.querySelectorAll(".checkR");
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            checkboxes.forEach(cb => {
+                if (cb !== this) {
+                    cb.checked = false;
+                }
+            });
+        }
+    });
+});
+
 // Очистка фона
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
