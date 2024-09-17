@@ -13,21 +13,13 @@
         }
 
         body {
-            background-color: #1c1c1c; /* Тёмный фон */
-            display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 70%;
-            max-width: 1000px;
             background-color: #333; /* Тёмный фон контейнера */
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            min-width: 500px;
         }
+
 
         .header {
             display: flex;
@@ -42,28 +34,66 @@
             font-size: 1.3em;
             color: #f0f0f0;
         }
+        @media (min-width: 920px) {
+            .form-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-start;
+                margin-bottom: 30px;
+            }
+            form {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                flex-direction: column;
+                width: 65%;
+            }
+        }
+        @media (max-width: 920px) {
+            .form-container {
+                flex-direction: column;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            form {
+                order: 2;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .input-group{
+                flex-direction: column;
+            }
+            .graph-canvas{
+                display: flex;
+                justify-content: center;
+                order: 1;
+                width: 100%;
+            }
 
-        .form-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
+            canvas{
+            }
+
+
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 280px;
-        }
+
 
         .input-group {
+            display: flex;
+            justify-content: flex-start;
+            align-content: center;
             margin-bottom: 15px;
         }
 
         label {
             font-size: 1.1em;
             color: #e0e0e0;
-            margin-bottom: 5px;
+            margin: 5px;
+
         }
 
         input[type="text"] {
@@ -102,13 +132,6 @@
             background-color: #001f4d;
         }
 
-        .rectangle {
-            width: 300px;
-            height: 200px;
-            background-color: #444;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
 
         .large-rectangle {
             padding: 20px;
@@ -123,6 +146,7 @@
             width: 100%;
             border-collapse: collapse;
             color: #f0f0f0;
+            height: auto;
         }
 
         thead {
@@ -132,6 +156,7 @@
 
         th, td {
             padding: 12px;
+            width: 20%;
             text-align: left;
             border-bottom: 1px solid #555;
         }
@@ -154,12 +179,13 @@
             text-align: center;
         }
 
+
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
+        <div class="header" style="font-family: fantasy">
             <h1>Захарченко Роман Владимирович</h1>
             <h2>Группа Р3131 / Вариант 660</h2>
         </div>
@@ -203,33 +229,25 @@
             </form>
 
             <!-- Canvas для отрисовки фигуры -->
-            <canvas id="graphCanvas" width="300" height="300"></canvas>
+            <div class = "graph-canvas">
+                <canvas id="graphCanvas" width="300" height="300"></canvas>
+            </div>
         </div>
 
         <div class="large-rectangle">
             <table>
                 <thead>
-                <tr>
-                    <th>Название</th>
-                    <th>Описание</th>
-                    <th>Дата</th>
-                </tr>
+                    <tr>
+                        <th>№ </th>
+                        <th>X, Y, R</th>
+                        <th>Результат</th>
+                        <th>Время реальное</th>
+                        <th>Время работы скрипта</th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>Элемент 1</td>
-                    <td>Это описание первого элемента.</td>
-                    <td>01.09.2024</td>
-                </tr>
-                <tr>
-                    <td>Элемент 2</td>
-                    <td>Описание второго элемента.</td>
-                    <td>05.09.2024</td>
-                </tr>
-                </tbody>
+                <tbody id = "myTBody"></tbody>
             </table>
         </div>
-    </div>
     <script src = "script.js"></script>
     <script src = "graph.js"></script>
 </body>

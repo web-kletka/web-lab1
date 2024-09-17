@@ -1,10 +1,12 @@
-class Request {
+class Interaction {
     constructor(form) {
         console.log("Request init")
         this.form = form;
     }
     send = async (ev) => {
         ev.preventDefault()
+
+
         const formData = new FormData(this.form);
         const params = new URLSearchParams(formData);
         console.log(params.get("r"))
@@ -13,30 +15,32 @@ class Request {
         console.log("params ok")
         const url = "/fcgi-bin/hello-world.jar?" + params.toString();
         try {
-            const response = await fetch(url);
-            if (response.ok) {
-                try {
-                    const result = await response.json();
-
-                    if (result.got.toString() === "true"){
-                        outputText.textContent = "Попал";
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Если статус ответа 200, парсим JSON
+                    } else {
+                        return response.json().then(result => {
+                            throw new Error(result.error.toString()); // Обработка ошибок с сервера
+                        });
                     }
-                    else {
+                })
+                .then(result => {
+                    if (result.got.toString() === "true") {
+                        outputText.textContent = "Попал";
+                    } else {
                         outputText.textContent = "Промазал";
                     }
+
+                    num = num + 1;
+                    this.addNewRow(num, params.get("x"), params.get("y"), params.get("r"), result.got.toString(), "Пока так", "Пока так");
                     console.log(result);
-                } catch (error) {
-                    console.error('Ошибка парсинга JSON', error)
-                }
-            } else {
-                try {
-                    const result = await response.json();
-                    outputText.hidden = false
-                    outputText.textContent = result.error.toString()
-                } catch (error) {
-                    console.error('Ошибка парсинга JSON', error)
-                }
-            }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    outputText.textContent = error.message;
+                });
+
         } catch (error) {
             console.error('Ошибка', error)
         }
@@ -78,13 +82,48 @@ class Request {
             return false;
         }
     }
+
+    addNewRow = (num, x, y, r, result, time, scrtime) => {
+
+        console.log("tbody start add")
+        var row = tBody.insertRow(tBody.rows.length);
+
+// Создаем ячейки и добавляем их в строку
+        var numTD = document.createElement("td");
+        var xyrTD = document.createElement("td");
+        var resTD = document.createElement("td");
+        var timeTD = document.createElement("td");
+        var scrtimeTD = document.createElement("td");
+        row.appendChild(numTD);
+        row.appendChild(xyrTD);
+        row.appendChild(resTD);
+        row.appendChild(timeTD);
+        row.appendChild(scrtimeTD);
+
+        numTD.innerHTML = num;
+        xyrTD.innerHTML = x + ", " + y + ", " + r
+        if (result === "true"){
+            resTD.innerHTML = "Попал";
+        }
+        else {
+            resTD.innerHTML = "Промазал";
+        }
+        timeTD.innerHTML = time
+        scrtimeTD.innerHTML = scrtime
+        console.log("tbody add")
+    }
+
+
 }
 
-const outputText = document.getElementById("out_put_text")
 
+
+const outputText = document.getElementById("out_put_text")
+const tBody = document.getElementById("myTBody")
+let num = 0;
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector("form");
-    const req = new Request(form);
+    const req = new Interaction(form);
     form.addEventListener("submit", req.send);
 });
