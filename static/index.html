@@ -16,7 +16,6 @@
             align-items: center;
             background-color: #333; /* Тёмный фон контейнера */
             padding: 20px;
-            border-radius: 10px;
             min-width: 500px;
         }
 
@@ -73,11 +72,6 @@
                 order: 1;
                 width: 100%;
             }
-
-            canvas{
-            }
-
-
         }
 
 
@@ -113,7 +107,7 @@
         }
 
         .radio-group label, .checkbox-group label {
-            margin-right: 10px;
+            margin-right: 12px;
             color: #e0e0e0;
         }
 
@@ -156,8 +150,8 @@
 
         th, td {
             padding: 12px;
-            width: 20%;
-            text-align: left;
+            width: 23%;
+            text-align: center;
             border-bottom: 1px solid #555;
         }
 
@@ -169,9 +163,17 @@
             background-color: #555;
         }
 
+        tbody td:first-child{
+            width: 6%;
+        }
+        thead th:first-child{
+            width: 6%;
+        }
+
         th {
             font-weight: bold;
         }
+
 
         .out_put_text {
             color: white;
@@ -184,70 +186,69 @@
     </style>
 </head>
 <body>
+    <div class="header" style="font-family: fantasy">
+        <h1>Захарченко Роман Владимирович</h1>
+        <h2>Группа Р3131 / Вариант 660</h2>
+    </div>
 
-        <div class="header" style="font-family: fantasy">
-            <h1>Захарченко Роман Владимирович</h1>
-            <h2>Группа Р3131 / Вариант 660</h2>
-        </div>
-
-        <div class="form-container">
-            <form class="myform">
-                <!-- Поля формы (оставляем как есть) -->
-                <div class="input-group">
-                    <label>Изменение X:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="x" value="-4"> -4</label>
-                        <label><input type="radio" name="x" value="-3"> -3</label>
-                        <label><input type="radio" name="x" value="-2"> -2</label>
-                        <label><input type="radio" name="x" value="-1"> -1</label>
-                        <label><input type="radio" name="x" value="0"> 0</label>
-                        <label><input type="radio" name="x" value="1"> 1</label>
-                        <label><input type="radio" name="x" value="2"> 2</label>
-                        <label><input type="radio" name="x" value="3"> 3</label>
-                        <label><input type="radio" name="x" value="4"> 4</label>
-                    </div>
+    <div class="form-container">
+        <form class="myform">
+            <!-- Поля формы (оставляем как есть) -->
+            <div class="input-group">
+                <label>Изменение X:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="x" value="-4"> -4</label>
+                    <label><input type="radio" name="x" value="-3"> -3</label>
+                    <label><input type="radio" name="x" value="-2"> -2</label>
+                    <label><input type="radio" name="x" value="-1"> -1</label>
+                    <label><input type="radio" name="x" value="0"> 0</label>
+                    <label><input type="radio" name="x" value="1"> 1</label>
+                    <label><input type="radio" name="x" value="2"> 2</label>
+                    <label><input type="radio" name="x" value="3"> 3</label>
+                    <label><input type="radio" name="x" value="4"> 4</label>
                 </div>
-
-                <div class="input-group">
-                    <label for="y-coordinate">Изменение Y:</label>
-                    <input type="text" id="y-coordinate" name="y" placeholder="-3 ... 3"/>
-                </div>
-
-                <div class="input-group">
-                    <label>Изменение R:</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="r" value="1" class = "checkR"> 1</label>
-                        <label><input type="checkbox" name="r" value="2" class = "checkR"> 2</label>
-                        <label><input type="checkbox" name="r" value="3" class = "checkR"> 3</label>
-                        <label><input type="checkbox" name="r" value="4" class = "checkR"> 4</label>
-                        <label><input type="checkbox" name="r" value="5" class = "checkR"> 5</label>
-                    </div>
-                </div>
-
-                <button type="submit">Отправить</button>
-                <h3 id="out_put_text" class="out_put_text" >Результат</h3>
-            </form>
-
-            <!-- Canvas для отрисовки фигуры -->
-            <div class = "graph-canvas">
-                <canvas id="graphCanvas" width="300" height="300"></canvas>
             </div>
-        </div>
 
-        <div class="large-rectangle">
-            <table>
-                <thead>
-                    <tr>
-                        <th>№ </th>
-                        <th>X, Y, R</th>
-                        <th>Результат</th>
-                        <th>Время реальное</th>
-                        <th>Время работы скрипта</th>
-                    </tr>
-                </thead>
-                <tbody id = "myTBody"></tbody>
-            </table>
+            <div class="input-group">
+                <label for="y-coordinate">Изменение Y:</label>
+                <input type="text" id="y-coordinate" name="y" placeholder="-3 ... 3"/>
+            </div>
+
+            <div class="input-group">
+                <label>Изменение R:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="r" value="1" class = "checkR"> 1</label>
+                    <label><input type="checkbox" name="r" value="2" class = "checkR"> 2</label>
+                    <label><input type="checkbox" name="r" value="3" class = "checkR"> 3</label>
+                    <label><input type="checkbox" name="r" value="4" class = "checkR"> 4</label>
+                    <label><input type="checkbox" name="r" value="5" class = "checkR"> 5</label>
+                </div>
+            </div>
+
+            <button type="submit">Отправить</button>
+            <h3 id="out_put_text" class="out_put_text" >Результат</h3>
+        </form>
+
+        <!-- Canvas для отрисовки фигуры -->
+        <div class = "graph-canvas">
+            <canvas id="graphCanvas" width="300" height="300"></canvas>
         </div>
+    </div>
+
+    <div class="large-rectangle">
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>X, Y, R</th>
+                    <th>Результат</th>
+                    <th>Время реальное</th>
+                    <th>Время работы скрипта (мс)</th>
+                </tr>
+            </thead>
+            <tbody id = "myTBody"></tbody>
+        </table>
+    </div>
     <script src = "script.js"></script>
     <script src = "graph.js"></script>
 </body>

@@ -5,7 +5,9 @@ import lombok.Getter;
 public enum JSON {
     RESULT_JSON("""
             {
-                "got": %b
+                "got": %b,
+                "time": "%s",
+                "date": "%s"
             }
             """),
     ERROR_JSON("""

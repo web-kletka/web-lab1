@@ -4,6 +4,7 @@ import com.fastcgi.FCGIInterface;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.example.common.customException.ValidException;
@@ -16,19 +17,20 @@ public class Server {
     public void run() {
         logger.info("Server started");
         var fcgiInterface = new FCGIInterface();
+        String response = "";
+        long startTime;
         while (fcgiInterface.FCGIaccept() >= 0) {
-            String json = "";
-            String response = "";
+            startTime = System.currentTimeMillis();
             try {
                 var request = readRequestBody();
                 var params = new ParsParams(request);
                 logger.info("Params: x = " + params.getX() + " y = " + params.getY() + " r = " + params.getR());
                 var result = calculate(params.getX(), params.getY(), params.getR());
                 logger.info("Result: " + result);
-                json = makeJson(result, JSON.RESULT_JSON);
-                response = makeResponse(json, Headers.HEADER_200);
+                var json = makeJson(result, String.valueOf(System.currentTimeMillis() - startTime), String.valueOf(new Date()), JSON.RESULT_JSON);
+                response = makeResponse(json,Headers.HEADER_200);
             } catch (IOException | ValidException e) {
-                json = makeJson(e.getMessage(), JSON.ERROR_JSON);
+                var json = makeJson(e.getMessage(), JSON.ERROR_JSON);
                 response = makeResponse(json, Headers.HEADER_500);
             }
             send(response);
@@ -42,6 +44,10 @@ public class Server {
 
     private String makeResponse(String content, Headers header){
         return header.getHeader().formatted(content.getBytes(StandardCharsets.UTF_8).length + 2, content);
+    }
+
+    private String makeJson(Object content, String time, String date, JSON json){
+        return json.getJson().formatted(content, time, date);
     }
 
     private String makeJson(Object content, JSON json){

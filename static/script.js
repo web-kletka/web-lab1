@@ -33,7 +33,7 @@ class Interaction {
                     }
 
                     num = num + 1;
-                    this.addNewRow(num, params.get("x"), params.get("y"), params.get("r"), result.got.toString(), "Пока так", "Пока так");
+                    this.addNewRow(num, params.get("x"), params.get("y"), params.get("r"), result.got.toString(), result.date, result.time);
                     console.log(result);
                 })
                 .catch(error => {
@@ -66,14 +66,9 @@ class Interaction {
             result = "ERROR: y not num";
             console.log("ERROR: y not num");
         }
-        if(-3 > y || y > 3){
-            result = "y not between -3 and 3";
-            console.log("y not between -3 and 3");
-        }
         if (r == null){
             result = "ERROR: r = null";
         }
-
         if (result === "")
             return true;
         else {
